@@ -1,0 +1,55 @@
+package deneme2;
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class ComVsCom extends JPanel implements ActionListener{
+	final static int GENISLIK = 1024;
+	final static int YUKSEKLIK = 768;
+	final static int KART_X = 96;
+	final static int KART_Y = 160;
+	Timer oyunDongusu = new Timer(1000,this);
+	
+	public ComVsCom() {
+		//Sahne ilk açýldýðýnda deðiþken atamalarý buraada yapýlacak processingdeki setup();
+		oyunDongusu.start();
+	}
+	
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		//Oyuncu 1
+		g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - 10, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + 10, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		
+		//Ortadaki kartlar
+		//g.fillRect(x, y, width, height);
+		//g.fillRect(x, y, width, height);
+		
+		//Oyuncu 2
+		//g.fillRect(x, y, width, height);
+		//g.fillRect(x, y, width, height);
+		//g.fillRect(x, y, width, height);
+		
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		//Oyun dongumuz burada iþlemleri yapcazya
+		
+		
+		repaint();
+	}
+	
+}

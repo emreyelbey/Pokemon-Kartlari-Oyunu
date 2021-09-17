@@ -1,0 +1,28 @@
+package deneme2;
+
+public class InsanOyuncusu extends Oyuncu{
+
+	private String[] kartListesi = new String[3];
+	
+	InsanOyuncusu() {
+		
+	}
+	
+	InsanOyuncusu(int oyuncuID, int skor, String oyuncuAdi){
+		super(oyuncuID, skor, oyuncuAdi);
+	}
+	
+	public String kartSec() {
+		String x = "EMRE";
+		return x;
+	}
+	
+	public String[] getKartListesi() {
+		return kartListesi;
+	}
+
+	public void setKartListesi(String[] kartListesi) {
+		this.kartListesi = kartListesi;
+	}
+	
+}

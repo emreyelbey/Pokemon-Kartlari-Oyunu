@@ -1,0 +1,107 @@
+package deneme2;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class ComVsCom extends JPanel implements ActionListener,MouseListener{
+	final static int GENISLIK = 1024;
+	final static int YUKSEKLIK = 768;
+	final static int KART_X = 96;
+	final static int KART_Y = 160;
+	Timer oyunDongusu = new Timer(1000,this);
+	int t;
+	
+	public ComVsCom() {
+		//Sahne ilk açýldýðýnda deðiþken atamalarý buraada yapýlacak processingdeki setup();
+		oyunDongusu.start();
+		t = 0;
+	}
+	
+	
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		
+		if(t % 2 == 0) {
+			g.setColor(Color.gray);
+		}else {
+			g.setColor(Color.red);
+		}
+		
+		//Oyuncu 1
+		g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - 10, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + 10, YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		
+		//Ortadaki kartlar
+		g.fillRect(GENISLIK/2 - KART_X/2 - KART_X/2 -5 , YUKSEKLIK/2 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X/2 + KART_X/2 +5, YUKSEKLIK/2 - KART_Y/2, KART_X, KART_Y);
+		
+		//Oyuncu 2
+		g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - 10, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + 10, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2, KART_X, KART_Y);
+		
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		//Oyun dongumuz burada iþlemleri yapcazya
+		
+		t++;
+		repaint();
+	}
+	
+	public boolean mouseOver(int mouseX,int mouseY,int x, int y, int w, int h) {
+		if(mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
+			return true;
+		}
+		return false;
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

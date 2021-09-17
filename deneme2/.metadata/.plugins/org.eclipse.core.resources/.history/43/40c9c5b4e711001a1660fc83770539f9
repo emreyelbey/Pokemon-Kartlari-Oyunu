@@ -1,0 +1,29 @@
+package deneme2;
+
+import java.util.ArrayList;
+
+public class BilgisayarOyuncusu extends Oyuncu{
+	
+	ArrayList<Pokemon> kartListesiBil = new ArrayList<Pokemon>();
+	
+	BilgisayarOyuncusu(){
+		super(-1, -1, null);
+	}
+	
+	BilgisayarOyuncusu(int oyuncuID, int skor, String oyuncuAdi){
+		super(oyuncuID, skor, oyuncuAdi);
+	}
+	
+	public ArrayList<Pokemon> kartSec() {
+		
+		return ;
+	}
+
+	public ArrayList<Pokemon> getKartListesi() {
+		return kartListesiBil;
+	}
+
+	public void setKartListesi(ArrayList<Pokemon> kartListesiBil) {
+		this.kartListesiBil = kartListesiBil;
+	}	
+}

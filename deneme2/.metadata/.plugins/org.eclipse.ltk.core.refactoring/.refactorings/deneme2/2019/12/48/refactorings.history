@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;bilgisayarOyuncusu1&apos; in &apos;deneme2.HumvsCom&apos; to &apos;bilgisayarOyuncusu&apos;&#x0D;&#x0A;- Original project: &apos;deneme2&apos;&#x0D;&#x0A;- Original element: &apos;deneme2.HumvsCom.bilgisayarOyuncusu1&apos;&#x0D;&#x0A;- Renamed element: &apos;deneme2.HumvsCom.bilgisayarOyuncusu&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;bilgisayarOyuncusu1&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;deneme2{HumvsCom.java[HumvsCom^bilgisayarOyuncusu1" name="bilgisayarOyuncusu" references="true" setter="false" stamp="1575211783526" textual="false" version="1.0"/>
+</session>

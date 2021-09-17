@@ -1,0 +1,2035 @@
+package deneme2;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class BilgisayarOyuncusu extends Oyuncu{
+	
+	private ArrayList<Pokemon> kartListesiBil = new ArrayList<Pokemon>();
+	
+	BilgisayarOyuncusu(){
+		super(-1, -1, null);
+	}
+	
+	BilgisayarOyuncusu(int oyuncuID, int skor, String oyuncuAdi){
+		super(oyuncuID, skor, oyuncuAdi);
+	}
+
+	int randomNum;
+	Random rand = new Random();
+	@Override
+	public Pokemon kartSec(int kartIndis) {
+		randomNum = rand.nextInt(kartListesiBil.size());
+		Pokemon temp = kartListesiBil.get(randomNum);
+		kartListesiBil.remove(randomNum);
+		return temp;
+	}
+
+	@Override
+	public void skorGoster(Graphics g){
+		if(getOyuncuID() == 1){
+			g.drawString("Computer1 Score: " + Integer.toString(getSkor()),750, 75);
+		}else if(getOyuncuID() == 2){
+			g.drawString("Computer2 Score: " +Integer.toString(getSkor()),750, 673);
+		}
+		else{
+			g.drawString("Computer Score: " +Integer.toString(getSkor()),750, 75);
+		}
+	}
+
+	public ArrayList<Pokemon> getKartListesi() {
+		return kartListesiBil;
+	}
+
+	public void setKartListesi(ArrayList<Pokemon> kartListesiBil) {
+		this.kartListesiBil = kartListesiBil;
+	}	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Bulbasaur extends Pokemon{
+	
+	private int hasarPuani = 50;
+	private boolean kartKullanildiMi = false;
+
+	Bulbasaur(){
+		super(-1, null, null);
+	}
+
+	Bulbasaur(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Butterfree extends Pokemon{
+	
+	private int hasarPuani = 10;
+	private boolean kartKullanildiMi = false;
+	
+	Butterfree(){
+		super(-1, null, null);
+	}
+	
+	Butterfree(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Charmander extends Pokemon{
+
+	private int hasarPuani = 60;
+	private boolean kartKullanildiMi = false;
+	
+	Charmander(){
+		super(-1, null, null);
+	}
+	
+	Charmander(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class ComVsCom extends JPanel implements ActionListener{
+	final static int GENISLIK = 1024;
+	final static int YUKSEKLIK = 768;
+	final static int KART_X = 96;
+	final static int KART_Y = 160;
+	int HIZALAMA = 20;
+	int KARTBOSLUK = 20;
+	int ISIMHIZA_X = 5;
+	int ISIMHIZA_Y = 35;
+	Font cardFont, skorFont, kalanFont, oyunSonu;
+	Timer oyunDongusu = new Timer(2000,this);
+	BilgisayarOyuncusu bilgisayarOyuncusu1 = new BilgisayarOyuncusu(1,0,"Computer1");
+	BilgisayarOyuncusu bilgisayarOyuncusu2 = new BilgisayarOyuncusu(2,0,"Computer2");
+	Pokemon oynananP1, oynananP2;
+	ArrayList<Pokemon> kartListesi;
+	int savasSayisi;
+	
+	public ComVsCom() {
+		oyunDongusu.start();
+		cardFont = new Font("Arial",Font.BOLD,14);
+		skorFont = new Font("Arial", Font.PLAIN, 24);
+		kalanFont = new Font("Arial", Font.PLAIN, 18);
+		savasSayisi = 0;
+
+		kartListesi = new ArrayList<>();
+		kartListesi.add(new Bulbasaur(0,"Bulbasaur","Cim"));
+		kartListesi.add(new Butterfree(1,"Butterfree","Hava"));
+		kartListesi.add(new Charmander(2,"Charmander","Ates"));
+		kartListesi.add(new Jigglypuff(3,"Jigglypuff","Ses"));
+		kartListesi.add(new Meowth(4,"Meowth","Normal"));
+		kartListesi.add(new Pikachu(5,"Pikachu","Elektrik"));
+		kartListesi.add(new Psyduck(6,"Psyduck","Su"));
+		kartListesi.add(new Snorlax(7,"Snorlax","Normal"));
+		kartListesi.add(new Squirtle(8,"Squirtle","Su"));
+		kartListesi.add(new Zubat(9,"Zubat","Hava"));
+
+		kartDagit();
+	}
+
+	public void kartDagit(){
+		int randomNum;
+		Random rand = new Random();
+		for(int i=0; i<3; i++){
+			randomNum = rand.nextInt(kartListesi.size());
+			bilgisayarOyuncusu1.getKartListesi().add(kartListesi.get(randomNum));
+			kartListesi.remove(randomNum);
+			randomNum = rand.nextInt(kartListesi.size());
+			bilgisayarOyuncusu2.getKartListesi().add(kartListesi.get(randomNum));
+			kartListesi.remove(randomNum);
+		}
+	}
+
+	int randomNum, max=3, min=0;
+	public void kartCek(){
+		if(kartListesi.size() >= 2){
+			Random rand = new Random();
+			randomNum = rand.nextInt((max - min) + 1) + min;
+			bilgisayarOyuncusu1.getKartListesi().add(kartListesi.get(randomNum));
+			kartListesi.remove(randomNum);
+			max = max-1;
+			randomNum = rand.nextInt((max - min) + 1) + min;
+			bilgisayarOyuncusu2.getKartListesi().add(kartListesi.get(randomNum));
+			kartListesi.remove(randomNum);
+			max = max-1;
+		}
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		g.setFont(cardFont);
+		g.setColor(Color.gray);
+		g.fillRect(GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 , YUKSEKLIK/2 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+		if(bilgisayarOyuncusu1.getKartListesi().size() == 3){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(2).getHasarPuani()), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(0).getPokemonAdi(),GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(1).getPokemonAdi(),GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(2).getPokemonAdi(),GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+		}
+		else if(bilgisayarOyuncusu1.getKartListesi().size() == 2){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(0).getPokemonAdi(),GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(1).getPokemonAdi(),GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+		}
+		else if(bilgisayarOyuncusu1.getKartListesi().size() == 1) {
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu1.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu1.getKartListesi().get(0).getPokemonAdi(), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X, YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y);
+		}
+
+		if(bilgisayarOyuncusu2.getKartListesi().size() == 3){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(2).getHasarPuani()), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(0).getPokemonAdi(), GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(1).getPokemonAdi(), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(2).getPokemonAdi(), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+		}
+		else if(bilgisayarOyuncusu2.getKartListesi().size() == 2){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(0).getPokemonAdi(), GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(1).getPokemonAdi(), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+		}
+		else if(bilgisayarOyuncusu2.getKartListesi().size() == 1){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(bilgisayarOyuncusu2.getKartListesi().get(0).getHasarPuani()), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y*3);
+			g.drawString(bilgisayarOyuncusu2.getKartListesi().get(0).getPokemonAdi(), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y);
+		}
+
+		if(savasSayisi >= 1 && savasSayisi < 6){
+			g.setColor(Color.gray);
+			g.fillRect(GENISLIK / 2 - KART_X / 2 - KART_X / 2 - KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, KART_X, KART_Y);
+			g.fillRect(GENISLIK / 2 - KART_X / 2 + KART_X / 2 + KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, KART_X, KART_Y);
+			g.setColor(Color.darkGray);
+			g.drawString(Integer.toString(oynananP1.getHasarPuani()), GENISLIK/2 - KART_X/2 - KART_X/2 -KARTBOSLUK/2 +ISIMHIZA_X*7, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(Integer.toString(oynananP2.getHasarPuani()), GENISLIK/2 - KART_X/2 + KART_X/2 +KARTBOSLUK/2 +ISIMHIZA_X*7, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+			g.drawString(oynananP1.getPokemonAdi(), GENISLIK/2 - KART_X/2 - KART_X/2 -KARTBOSLUK/2 +ISIMHIZA_X, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+			g.drawString(oynananP2.getPokemonAdi(), GENISLIK/2 - KART_X/2 + KART_X/2 +KARTBOSLUK/2 +ISIMHIZA_X, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+		}
+		g.setColor(Color.darkGray);
+		g.setFont(kalanFont);
+		g.drawString("Destede", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +16);
+		g.drawString("Kalan", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +48);
+		g.drawString("Kartlar:", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +80);
+		g.drawString(Integer.toString(kartListesi.size()),GENISLIK/2 - KART_X/2 -366 -KARTBOSLUK/2 +8,416);
+		g.setFont(skorFont);
+		g.setColor(Color.lightGray);
+		bilgisayarOyuncusu1.skorGoster(g);
+		bilgisayarOyuncusu2.skorGoster(g);
+	}
+
+	public void savas(Pokemon oynananP1, Pokemon oynananP2){
+		if(oynananP1.getHasarPuani() > oynananP2.getHasarPuani()){
+			bilgisayarOyuncusu1.setSkor(bilgisayarOyuncusu1.getSkor()+5);
+		}else if(oynananP1.getHasarPuani() < oynananP2.getHasarPuani()){
+			bilgisayarOyuncusu2.setSkor(bilgisayarOyuncusu2.getSkor()+5);
+		}
+	}
+
+	public String kazananiBelirle(BilgisayarOyuncusu bilgisayarOyuncusu1, BilgisayarOyuncusu bilgisayarOyuncusu2){
+		if(bilgisayarOyuncusu1.getSkor() > bilgisayarOyuncusu2.getSkor()){
+			return "Computer1 Won!";
+		}else if(bilgisayarOyuncusu1.getSkor() < bilgisayarOyuncusu2.getSkor()){
+			return "Computer2 Won!";
+		}else{
+			return "Ended in Draw!";
+		}
+	}
+
+	public void savasiBitir(String kazanan){
+		Graphics g = getGraphics();
+		g.setColor(Color.darkGray);
+		g.fillRect(0,0,1024,768);
+		oyunSonu = new Font("Arial",Font.PLAIN,64);
+		g.setFont(oyunSonu);
+		g.setColor(Color.lightGray);
+		g.drawString(kazanan, 256, 384);
+	}
+
+	public int ortayiTemizle(){
+		Graphics g = getGraphics();
+		g.setColor(Color.darkGray);
+		g.fillRect(GENISLIK / 2 - KART_X / 2 - KART_X / 2 - KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, 256, 256);
+		return 1;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(kartListesi.size() > 0 || bilgisayarOyuncusu1.getKartListesi().size() > 0 || bilgisayarOyuncusu2.getKartListesi().size() > 0) {
+			oynananP1 = bilgisayarOyuncusu1.kartSec(0);
+			oynananP2 = bilgisayarOyuncusu2.kartSec(0);
+			savas(oynananP1, oynananP2);
+			savasSayisi++;
+			kartCek();
+			repaint();
+		}else{
+			if(savasSayisi == 5) savasSayisi++;
+			int temizlendi = ortayiTemizle();
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
+			savasiBitir(kazananiBelirle(bilgisayarOyuncusu1, bilgisayarOyuncusu2));
+			if(temizlendi ==1){
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}
+				System.exit(0);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Color;
+
+public class frame extends JFrame {
+
+	private JPanel contentPane;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame frame = new frame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public frame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1024, 768);
+		setLocationRelativeTo(null);
+		
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		//PC VS HUMAN BUTONU
+		JButton btn_com_vs_hum = new JButton("Computer vs. Human");
+		btn_com_vs_hum.setFocusPainted(false);
+		btn_com_vs_hum.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
+		btn_com_vs_hum.setBackground(Color.LIGHT_GRAY);
+		btn_com_vs_hum.setForeground(Color.DARK_GRAY);
+		btn_com_vs_hum.setBounds(384, 464, 256, 64);
+		contentPane.add(btn_com_vs_hum);
+		btn_com_vs_hum.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				JFrame framehuman = new JFrame();
+				framehuman.setSize(1024, 768);
+				framehuman.setVisible(true);
+				framehuman.setLocationRelativeTo(null);
+				HumvsCom panelhvsh = new HumvsCom();
+				panelhvsh.setSize(1024, 768);
+				panelhvsh.setBackground(Color.DARK_GRAY);
+				framehuman.getContentPane().add(panelhvsh);
+			}
+		});
+		
+		//PC VS PC BUTONU
+		JButton btn_com_vs_com = new JButton("Computer vs. Computer");
+		btn_com_vs_com.setFocusPainted(false);
+		btn_com_vs_com.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
+		btn_com_vs_com.setBackground(Color.LIGHT_GRAY);
+		btn_com_vs_com.setForeground(Color.DARK_GRAY);
+		btn_com_vs_com.setBounds(384, 364, 256, 64);
+		contentPane.add(btn_com_vs_com);
+		btn_com_vs_com.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				JFrame framepc = new JFrame();
+				framepc.setSize(1024, 768);
+				framepc.setVisible(true);
+				framepc.setLocationRelativeTo(null);
+				ComVsCom panelcvsc = new ComVsCom();
+				panelcvsc.setSize(1024, 768);
+				panelcvsc.setBackground(Color.DARK_GRAY);
+				framepc.getContentPane().add(panelcvsc);
+			}
+		});
+		
+		//EXIT BUTONU
+		JButton btn_exit = new JButton("Exit");
+		btn_exit.setFocusPainted(false);
+		btn_exit.setFont(new Font("Bahnschrift", Font.PLAIN, 18));
+		btn_exit.setBackground(Color.LIGHT_GRAY);
+		btn_exit.setForeground(Color.DARK_GRAY);
+		btn_exit.setBounds(384, 564, 256, 64);
+		contentPane.add(btn_exit);
+		btn_exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				System.exit(0);
+			}
+		});
+		
+		//OYUN BASLIK LABEL'I
+		JLabel lblNewLabel = new JLabel("Pokemon Card Game");
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 64));
+		lblNewLabel.setBounds(192, 96, 640, 128);
+		contentPane.add(lblNewLabel);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class HumvsCom extends JPanel implements ActionListener,MouseListener{
+    final static int GENISLIK = 1024;
+    final static int YUKSEKLIK = 768;
+    final static int KART_X = 96;
+    final static int KART_Y = 160;
+    int HIZALAMA = 20;
+    int KARTBOSLUK = 20;
+    int ISIMHIZA_X = 5;
+    int ISIMHIZA_Y = 35;
+    int tur = 1;
+    int secilenKart = -1;
+    Font cardFont, skorFont, kalanFont, oyunSonu;
+    Timer oyunDongusu = new Timer(2000,this);
+    BilgisayarOyuncusu bilgisayarOyuncusu = new BilgisayarOyuncusu(3,0,"Computer");
+    InsanOyuncusu insanOyuncusu = new InsanOyuncusu(3,0,"Human");
+    Pokemon oynananP1, oynananP2;
+    ArrayList<Pokemon> kartListesi;
+    int savasSayisi;
+    int sunum = 1;
+
+    public HumvsCom() {
+        addMouseListener(this);
+        oyunDongusu.start();
+        cardFont = new Font("Arial",Font.BOLD,14);
+        skorFont = new Font("Arial", Font.PLAIN, 24);
+        kalanFont = new Font("Arial", Font.PLAIN, 18);
+        savasSayisi = 0;
+
+        kartListesi = new ArrayList<>();
+        kartListesi.add(new Bulbasaur(0,"Bulbasaur","Cim"));
+        kartListesi.add(new Butterfree(1,"Butterfree","Hava"));
+        kartListesi.add(new Charmander(2,"Charmander","Ates"));
+        kartListesi.add(new Jigglypuff(3,"Jigglypuff","Ses"));
+        kartListesi.add(new Meowth(4,"Meowth","Normal"));
+        kartListesi.add(new Pikachu(5,"Pikachu","Elektrik"));
+        kartListesi.add(new Psyduck(6,"Psyduck","Su"));
+        kartListesi.add(new Snorlax(7,"Snorlax","Normal"));
+        kartListesi.add(new Squirtle(8,"Squirtle","Su"));
+        kartListesi.add(new Zubat(9,"Zubat","Hava"));
+
+        kartDagit();
+    }
+
+    public void kartDagit(){
+        int randomNum;
+        Random rand = new Random();
+        for(int i=0; i<3; i++){
+            randomNum = rand.nextInt(kartListesi.size());
+            bilgisayarOyuncusu.getKartListesi().add(kartListesi.get(randomNum));
+            kartListesi.remove(randomNum);
+            randomNum = rand.nextInt(kartListesi.size());
+            insanOyuncusu.getKartListesi().add(kartListesi.get(randomNum));
+            kartListesi.remove(randomNum);
+        }
+    }
+
+    int randomNum, max=3, min=0;
+    public void kartCek(){
+        if(kartListesi.size() >= 2){
+            Random rand = new Random();
+            randomNum = rand.nextInt((max - min) + 1) + min;
+            bilgisayarOyuncusu.getKartListesi().add(kartListesi.get(randomNum));
+            kartListesi.remove(randomNum);
+            max = max-1;
+            randomNum = rand.nextInt((max - min) + 1) + min;
+            insanOyuncusu.getKartListesi().add(kartListesi.get(randomNum));
+            kartListesi.remove(randomNum);
+            max = max-1;
+        }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setFont(cardFont);
+        g.setColor(Color.gray);
+        g.fillRect(GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 , YUKSEKLIK/2 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+        if(bilgisayarOyuncusu.getKartListesi().size() == 3){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            if(sunum == 1) {
+            	g.setColor(Color.darkGray);
+                g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(2).getHasarPuani()), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(0).getPokemonAdi(),GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(1).getPokemonAdi(),GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(2).getPokemonAdi(),GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+            }
+        }
+        else if(bilgisayarOyuncusu.getKartListesi().size() == 2){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            if(sunum == 1) {
+            	g.setColor(Color.darkGray);
+                g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(0).getPokemonAdi(),GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(1).getPokemonAdi(),GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y);
+            }
+        }
+        else if(bilgisayarOyuncusu.getKartListesi().size() == 1) {
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA, KART_X, KART_Y);
+            if(sunum == 1) {
+                g.setColor(Color.darkGray);
+            	g.drawString(Integer.toString(bilgisayarOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK/5 - KART_Y/2 - HIZALAMA +ISIMHIZA_Y*3);
+                g.drawString(bilgisayarOyuncusu.getKartListesi().get(0).getPokemonAdi(), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X, YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y);
+            }
+        }
+
+        if(insanOyuncusu.getKartListesi().size() == 3){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.setColor(Color.darkGray);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(2).getHasarPuani()), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(insanOyuncusu.getKartListesi().get(0).getPokemonAdi(), GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+            g.drawString(insanOyuncusu.getKartListesi().get(1).getPokemonAdi(), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+            g.drawString(insanOyuncusu.getKartListesi().get(2).getPokemonAdi(), GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+        }
+        else if(insanOyuncusu.getKartListesi().size() == 2){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.setColor(Color.darkGray);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK/2 - KART_X /2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(1).getHasarPuani()), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(insanOyuncusu.getKartListesi().get(0).getPokemonAdi(), GENISLIK/2 - KART_X /2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+            g.drawString(insanOyuncusu.getKartListesi().get(1).getPokemonAdi(), GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+        }
+        else if(insanOyuncusu.getKartListesi().size() == 1){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y);
+            g.setColor(Color.darkGray);
+            g.drawString(Integer.toString(insanOyuncusu.getKartListesi().get(0).getHasarPuani()), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X*7, YUKSEKLIK - YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y*3);
+            g.drawString(insanOyuncusu.getKartListesi().get(0).getPokemonAdi(), GENISLIK / 2 - KART_X / 2 +ISIMHIZA_X, YUKSEKLIK - YUKSEKLIK / 5 - KART_Y / 2 - HIZALAMA + ISIMHIZA_Y);
+        }
+
+        if(savasSayisi >= 1 && savasSayisi < 6 ){
+            g.setColor(Color.gray);
+            g.fillRect(GENISLIK / 2 - KART_X / 2 - KART_X / 2 - KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, KART_X, KART_Y);
+            g.fillRect(GENISLIK / 2 - KART_X / 2 + KART_X / 2 + KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, KART_X, KART_Y);
+            g.setColor(Color.darkGray);
+            g.drawString(Integer.toString(oynananP1.getHasarPuani()), GENISLIK/2 - KART_X/2 - KART_X/2 -KARTBOSLUK/2 +ISIMHIZA_X*7, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(Integer.toString(oynananP2.getHasarPuani()), GENISLIK/2 - KART_X/2 + KART_X/2 +KARTBOSLUK/2 +ISIMHIZA_X*7, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y*3);
+            g.drawString(oynananP1.getPokemonAdi(), GENISLIK/2 - KART_X/2 - KART_X/2 -KARTBOSLUK/2 +ISIMHIZA_X, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+            g.drawString(oynananP2.getPokemonAdi(), GENISLIK/2 - KART_X/2 + KART_X/2 +KARTBOSLUK/2 +ISIMHIZA_X, YUKSEKLIK/2 - KART_Y/2 -HIZALAMA +ISIMHIZA_Y);
+        }
+
+        g.setColor(Color.darkGray);
+        g.setFont(kalanFont);
+        g.drawString("Destede", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +16);
+        g.drawString("Kalan", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +48);
+        g.drawString("Kartlar:", GENISLIK/2 - KART_X/2 -384 -KARTBOSLUK/2 +8, YUKSEKLIK/2 - KART_Y/2 +80);
+        g.drawString(Integer.toString(kartListesi.size()),GENISLIK/2 - KART_X/2 -366 -KARTBOSLUK/2 +8,416);
+        g.setFont(skorFont);
+        g.setColor(Color.lightGray);
+        bilgisayarOyuncusu.skorGoster(g);
+        insanOyuncusu.skorGoster(g);
+    }
+
+    public void savas(Pokemon oynananP1, Pokemon oynananP2){
+        if(oynananP1.getHasarPuani() > oynananP2.getHasarPuani()){
+            bilgisayarOyuncusu.setSkor(bilgisayarOyuncusu.getSkor()+5);
+        }else if(oynananP1.getHasarPuani() < oynananP2.getHasarPuani()){
+            insanOyuncusu.setSkor(insanOyuncusu.getSkor()+5);
+        }
+    }
+
+    public String kazananiBelirle(BilgisayarOyuncusu bilgisayarOyuncusu1, InsanOyuncusu insanOyuncusu){
+        if(bilgisayarOyuncusu1.getSkor() > insanOyuncusu.getSkor()){
+            return "Computer Won!";
+        }else if(bilgisayarOyuncusu1.getSkor() < insanOyuncusu.getSkor()){
+            return "Player Won!";
+        }else{
+            return "Ended in Draw!";
+        }
+    }
+
+    public void savasiBitir(String kazanan){
+        Graphics g = getGraphics();
+        g.setColor(Color.darkGray);
+        g.fillRect(0,0,1024,768);
+        oyunSonu = new Font("Arial",Font.PLAIN,64);
+        g.setFont(oyunSonu);
+        g.setColor(Color.lightGray);
+        g.drawString(kazanan, 256, 384);
+    }
+
+    public int ortayiTemizle(){
+        Graphics g = getGraphics();
+        g.setColor(Color.darkGray);
+        g.fillRect(GENISLIK / 2 - KART_X / 2 - KART_X / 2 - KARTBOSLUK / 2, YUKSEKLIK / 2 - KART_Y / 2 - HIZALAMA, 256, 200);
+        return 1;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(tur % 2 != 0){
+            oynananP2 = insanOyuncusu.kartSec(secilenKart);
+            if(oynananP2 != null){
+                tur++;
+                repaint();
+            }
+            if(bilgisayarOyuncusu.getKartListesi().size() == 0){
+                repaint();
+                System.out.println(savasSayisi);
+                if(savasSayisi == 5) {
+                    savasSayisi++;
+                    int temizlendi = ortayiTemizle();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    savasiBitir(kazananiBelirle(bilgisayarOyuncusu, insanOyuncusu));
+                    if(temizlendi ==1){
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                        System.exit(0);
+                    }
+                }
+            }
+        }
+        if(tur % 2 == 0){
+            oynananP1 = bilgisayarOyuncusu.kartSec(0);
+            savas(oynananP1,oynananP2);
+            savasSayisi++;
+            kartCek();
+            secilenKart = -1;
+            tur++;
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+
+        if(mouseOver(mouseX, mouseY, GENISLIK/2 - KART_X /2 - KART_X - KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y)){
+            secilenKart = 1;
+        }
+
+        if(mouseOver(mouseX, mouseY, GENISLIK/2 - KART_X /2, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y)){
+            secilenKart = 0;
+        }
+
+        if(mouseOver(mouseX, mouseY, GENISLIK/2 - KART_X /2 + KART_X + KARTBOSLUK, YUKSEKLIK - YUKSEKLIK/5 - KART_Y/2 -HIZALAMA, KART_X, KART_Y)){
+            secilenKart = 2;
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+	public boolean mouseOver(int mouseX,int mouseY,int x, int y, int w, int h) {
+        if (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+import java.awt.*;
+import java.util.ArrayList;
+
+public class InsanOyuncusu extends Oyuncu{
+	
+	ArrayList<Pokemon> kartListesiHum = new ArrayList<Pokemon>();
+	
+	InsanOyuncusu(){
+		super(-1, -1, null);
+	}
+	
+	InsanOyuncusu(int oyuncuID, int skor, String oyuncuAdi){
+		super(oyuncuID, skor, oyuncuAdi);
+	}
+
+	@Override
+	public Pokemon kartSec(int kartIndis) {
+		if(kartIndis != -1){
+			Pokemon temp = kartListesiHum.get(kartIndis);
+			kartListesiHum.remove(kartIndis);
+			return temp;
+		}
+		return null;
+	}
+
+	@Override
+	void skorGoster(Graphics g) {
+			g.drawString("Player Score: " +Integer.toString(getSkor()),750, 673);
+	}
+
+	public ArrayList<Pokemon> getKartListesi() {
+		return kartListesiHum;
+	}
+
+	public void setKartListesi(ArrayList<Pokemon> kartListesiHum) {
+		this.kartListesiHum = kartListesiHum;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Jigglypuff extends Pokemon{
+	
+	private int hasarPuani = 70;
+	private boolean kartKullanildiMi = false;
+
+	Jigglypuff(){
+		super(-1, null, null);
+	}
+	
+	Jigglypuff(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Meowth extends Pokemon{
+	
+	private int hasarPuani = 40;
+	private boolean kartKullanildiMi = false;
+	
+	Meowth(){
+		super(-1, null, null);
+	}
+	
+	Meowth(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+import java.awt.*;
+
+public abstract class Oyuncu {
+	
+	private int oyuncuID;
+	private int skor;
+	private String oyuncuAdi;
+
+	Oyuncu(){
+		this.oyuncuID = -1;
+		this.skor = -1;
+		this.oyuncuAdi = null;
+	}
+	
+	Oyuncu(int oyuncuID, int skor, String oyuncuAdi){
+		this.oyuncuID = oyuncuID;
+		this.skor = skor;
+		this.oyuncuAdi = oyuncuAdi;
+	}
+	
+	public abstract Pokemon kartSec(int kartIndis);
+	
+	void skorGoster(Graphics g){
+	}
+
+	public int getOyuncuID() {
+		return oyuncuID;
+	}
+
+	public void setOyuncuID(int oyuncuID) {
+		this.oyuncuID = oyuncuID;
+	}
+
+	public int getSkor() {
+		return skor;
+	}
+
+	public void setSkor(int skor) {
+		this.skor = skor;
+	}
+
+	public String getOyuncuAdi() {
+		return oyuncuAdi;
+	}
+
+	public void setOyuncuAdi(String oyuncuAdi) {
+		this.oyuncuAdi = oyuncuAdi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Pikachu extends Pokemon{
+	
+	private int hasarPuani = 40;
+	private boolean kartKullanildiMi = false;
+	
+	Pikachu(){
+		super(-1, null, null);
+	}
+	
+	Pikachu(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Pokemon {
+	
+	private int pokemonID;
+	private String pokemonAdi;
+	private String pokemonTipi;
+	
+	Pokemon(){
+		this.setPokemonID(-1);
+		this.setPokemonAdi(null);
+		this.setPokemonTipi(null);
+	}
+	
+	Pokemon(int pokemonID, String pokemonAdi, String pokemonTipi){
+		this.setPokemonID(pokemonID);
+		this.setPokemonAdi(pokemonAdi);
+		this.setPokemonTipi(pokemonTipi);
+	}
+	
+	void HasarPuaniGoster(int hasarPuani){
+		System.out.println(hasarPuani);
+	}
+
+	public String getPokemonTipi() {
+		return pokemonTipi;
+	}
+
+	public void setPokemonTipi(String pokemonTipi) {
+		this.pokemonTipi = pokemonTipi;
+	}
+
+	public int getPokemonID() {
+		return pokemonID;
+	}
+
+	public void setPokemonID(int pokemonID) {
+		this.pokemonID = pokemonID;
+	}
+
+	public String getPokemonAdi() {
+		return pokemonAdi;
+	}
+
+	public void setPokemonAdi(String pokemonAdi) {
+		this.pokemonAdi = pokemonAdi;
+	}
+
+	public int getHasarPuani(){
+		return -1000;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Psyduck extends Pokemon{
+	
+	private int hasarPuani = 20;
+	private boolean kartKullanildiMi = false;
+	
+	Psyduck(){
+		super(-1, null, null);
+	}
+	
+	Psyduck(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Snorlax extends Pokemon{
+	
+	private int hasarPuani = 30;
+	private boolean kartKullanildiMi = false;
+	
+	Snorlax(){
+		super(-1, null, null);
+	}
+	
+	Snorlax(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Squirtle extends Pokemon{
+
+	private int hasarPuani = 30;
+	private boolean kartKullanildiMi = false;
+	
+	Squirtle(){
+		super(-1, null, null);
+	}
+	
+	Squirtle(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package deneme2;
+
+public class Zubat extends Pokemon{
+	
+	private int hasarPuani = 50;
+	private boolean kartKullanildiMi = false;
+	
+	Zubat(){
+		super(-1, null, null);
+	}
+	
+	Zubat(int pokemonID, String pokemonAdi, String pokemonTipi){
+		super(pokemonID, pokemonAdi, pokemonTipi);
+	}
+
+	public int getHasarPuani() {
+		return hasarPuani;
+	}
+
+	public void setHasarPuani(int hasarPuani) {
+		this.hasarPuani = hasarPuani;
+	}
+
+	public boolean isKartKullanildiMi() {
+		return kartKullanildiMi;
+	}
+
+	public void setKartKullanildiMi(boolean kartKullanildiMi) {
+		this.kartKullanildiMi = kartKullanildiMi;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\emre_\Documents\JavaProjects\PROLAB2\.metadata\.plugins\org.eclipse.jdt.core
+4207122419.index
+113558702.index
