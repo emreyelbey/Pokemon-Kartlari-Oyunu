@@ -6,9 +6,6 @@ __________________________________________________________
 __________________________________________________________
 
 
-Copyright© 
-All rights reserved.
-
 
 Bu Readme.txt dosyası, programın içeriğini ve nasıl kullanıldığı bilgisini içerir.
 
